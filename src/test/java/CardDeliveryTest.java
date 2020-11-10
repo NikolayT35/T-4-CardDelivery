@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -25,7 +25,8 @@ public class CardDeliveryTest {
         form.$("[data-test-id=phone] input").setValue("+79999999999");
         form.$("[data-test-id=agreement]").click();
         form.$(".button").click();
-        $(withText("Успешно!")).waitUntil(exist, 15000);
+      $(withText("Успешно!")).waitUntil(visible, 15000);
+       $("[data-test-id='notification'] .notification__content").shouldHave(exactText("Встреча успешно забронирована на 13.11.2020")).waitUntil(exist, 20000);
     }
 }
 
